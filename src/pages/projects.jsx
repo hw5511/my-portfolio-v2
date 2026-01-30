@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { supabase } from '../lib/supabase';
+import ProjectCard from '../components/projects/project-card';
 
 /**
  * Projects 페이지 컴포넌트
@@ -11,22 +12,73 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
  * <Projects />
  */
 function Projects() {
+  const [projects, setProjects] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    async function fetchProjects() {
+      if (!supabase) {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from('projects')
+          .select('*')
+          .eq('is_published', true)
+          .order('sort_order', { ascending: true });
+
+        if (error) {
+          throw error;
+        }
+
+        setProjects(data || []);
+      } catch (err) {
+        console.error('Failed to fetch projects:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchProjects();
+  }, []);
+
   return (
     <main className="flex-1">
       <section className="w-full py-12 md:py-24">
         <div className="container px-4 md:px-6">
-          <Card className="border-dashed border-2">
-            <CardHeader>
-              <CardTitle className="text-3xl md:text-5xl font-bold tracking-tighter text-center">
-                Projects
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col items-center justify-center min-h-[400px] p-6 text-center">
-              <p className="text-muted-foreground text-lg max-w-[700px]">
-                Projects 페이지가 개발될 공간입니다. 포트폴리오 작품들이 들어갈 예정입니다.
-              </p>
-            </CardContent>
-          </Card>
+          <div className="text-center mb-12">
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tighter mb-4">
+              Projects
+            </h1>
+            <p className="text-muted-foreground text-lg max-w-[700px] mx-auto">
+              개발한 프로젝트들을 소개합니다.
+            </p>
+          </div>
+
+          {isLoading ? (
+            <div className="flex justify-center items-center min-h-[300px]">
+              <p className="text-muted-foreground">로딩 중...</p>
+            </div>
+          ) : projects.length === 0 ? (
+            <div className="flex justify-center items-center min-h-[300px]">
+              <p className="text-muted-foreground">등록된 프로젝트가 없습니다.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  title={project.title}
+                  description={project.description}
+                  techStack={project.tech_stack}
+                  detailUrl={project.detail_url}
+                  thumbnailUrl={project.thumbnail_url}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </main>
