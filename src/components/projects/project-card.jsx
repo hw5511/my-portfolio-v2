@@ -25,11 +25,11 @@ function ProjectCard({ title, description, techStack = [], detailUrl, thumbnailU
   return (
     <Card className="group overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
       {thumbnailUrl && (
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden aspect-square">
           <img
             src={thumbnailUrl}
             alt={`${title} 썸네일`}
-            className="w-full h-48 object-cover object-top transition-transform duration-300 group-hover:scale-105"
+            className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
           />
         </div>
