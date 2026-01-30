@@ -17,6 +17,10 @@ function ContactSection() {
   const [isLoading, setIsLoading] = React.useState(true);
 
   const fetchEntries = React.useCallback(async () => {
+    if (!supabase) {
+      setIsLoading(false);
+      return;
+    }
     setIsLoading(true);
     try {
       const { data, error } = await supabase

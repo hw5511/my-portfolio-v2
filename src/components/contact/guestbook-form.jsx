@@ -41,6 +41,11 @@ function GuestbookForm({ onSubmitSuccess }) {
       return;
     }
 
+    if (!supabase) {
+      setError('서비스에 연결할 수 없습니다.');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
