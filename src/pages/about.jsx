@@ -33,6 +33,7 @@ import {
   Home as HomeIcon
 } from '@mui/icons-material';
 import { usePortfolio } from '../context/portfolio-context';
+import { CometCard } from '../components/ui/comet-card';
 
 /**
  * 아이콘 매핑 함수
@@ -271,56 +272,116 @@ function About() {
     <main className="flex-1">
       <Box sx={{ py: { xs: 4, md: 8 }, bgcolor: '#f8fafc' }}>
         <Container maxWidth="lg">
-          {/* 기본 정보 섹션 */}
-          <Card sx={{ mb: 4, overflow: 'visible', border: '1px solid #e2e8f0' }}>
-            <CardContent sx={{ p: { xs: 3, md: 5 } }}>
-              <Grid container spacing={4} alignItems="center">
-                <Grid size={{ xs: 12, md: 4 }} sx={{ textAlign: 'center' }}>
+          {/* 기본 정보 섹션 (CometCard 적용) */}
+          <Grid container spacing={4} sx={{ mb: 4 }}>
+            <Grid size={{ xs: 12, md: 4 }}>
+              <CometCard rotateDepth={12} translateDepth={15}>
+                <Card
+                  sx={{
+                    textAlign: 'center',
+                    p: 4,
+                    bgcolor: '#1e293b',
+                    border: '1px solid',
+                    borderColor: '#334155',
+                    borderRadius: 3,
+                    overflow: 'hidden',
+                    position: 'relative',
+                    '&::before': {
+                      content: '""',
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%)',
+                      pointerEvents: 'none'
+                    }
+                  }}
+                >
                   <Avatar
-                    src={basicInfo.photo}
+                    src={`https://picsum.photos/400/400?random=${Date.now()}`}
                     alt={basicInfo.name}
                     sx={{
-                      width: { xs: 150, md: 200 },
-                      height: { xs: 150, md: 200 },
+                      width: { xs: 150, md: 180 },
+                      height: { xs: 150, md: 180 },
                       mx: 'auto',
-                      border: '3px solid',
-                      borderColor: '#1e293b',
-                      boxShadow: 2
+                      mb: 3,
+                      border: '4px solid',
+                      borderColor: '#64748b',
+                      boxShadow: '0 8px 24px rgba(0,0,0,0.4)'
                     }}
                   />
-                </Grid>
-                <Grid size={{ xs: 12, md: 8 }}>
+                  <Typography variant="h4" fontWeight="bold" sx={{ mb: 1, color: '#f8fafc' }}>
+                    {basicInfo.name}
+                  </Typography>
+                  <Chip
+                    label={basicInfo.experience}
+                    size="small"
+                    sx={{
+                      bgcolor: '#475569',
+                      color: '#f1f5f9',
+                      fontWeight: 'bold',
+                      mt: 1
+                    }}
+                  />
+                </Card>
+              </CometCard>
+            </Grid>
+            <Grid size={{ xs: 12, md: 8 }}>
+              <Card sx={{ height: '100%', border: '1px solid #e2e8f0' }}>
+                <CardContent sx={{ p: { xs: 3, md: 4 } }}>
                   <Typography
                     variant="h3"
                     fontWeight="bold"
-                    sx={{ fontSize: { xs: '2rem', md: '3rem' }, mb: 2, color: '#1e293b' }}
+                    sx={{ fontSize: { xs: '1.8rem', md: '2.5rem' }, mb: 3, color: '#1e293b' }}
                   >
-                    {basicInfo.name}
+                    Profile
                   </Typography>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <SchoolIcon sx={{ color: '#64748b' }} />
-                      <Typography variant="body1" sx={{ color: '#64748b' }}>
-                        {basicInfo.education}
-                      </Typography>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                      <Box sx={{ p: 1.5, bgcolor: '#f1f5f9', borderRadius: 2 }}>
+                        <SchoolIcon sx={{ color: '#1e293b' }} />
+                      </Box>
+                      <Box>
+                        <Typography variant="body2" sx={{ color: '#94a3b8', fontSize: '0.75rem' }}>
+                          학력
+                        </Typography>
+                        <Typography variant="body1" sx={{ color: '#1e293b', fontWeight: 500 }}>
+                          {basicInfo.education}
+                        </Typography>
+                      </Box>
                     </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <CodeIcon sx={{ color: '#64748b' }} />
-                      <Typography variant="body1" sx={{ color: '#64748b' }}>
-                        전공: {basicInfo.major}
-                      </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                      <Box sx={{ p: 1.5, bgcolor: '#f1f5f9', borderRadius: 2 }}>
+                        <CodeIcon sx={{ color: '#1e293b' }} />
+                      </Box>
+                      <Box>
+                        <Typography variant="body2" sx={{ color: '#94a3b8', fontSize: '0.75rem' }}>
+                          전공
+                        </Typography>
+                        <Typography variant="body1" sx={{ color: '#1e293b', fontWeight: 500 }}>
+                          {basicInfo.major}
+                        </Typography>
+                      </Box>
                     </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <WorkIcon sx={{ color: '#64748b' }} />
-                      <Typography variant="body1" sx={{ color: '#64748b' }}>
-                        경력: {basicInfo.experience}
-                      </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                      <Box sx={{ p: 1.5, bgcolor: '#f1f5f9', borderRadius: 2 }}>
+                        <WorkIcon sx={{ color: '#1e293b' }} />
+                      </Box>
+                      <Box>
+                        <Typography variant="body2" sx={{ color: '#94a3b8', fontSize: '0.75rem' }}>
+                          경력
+                        </Typography>
+                        <Typography variant="body1" sx={{ color: '#1e293b', fontWeight: 500 }}>
+                          {basicInfo.experience}
+                        </Typography>
+                      </Box>
                     </Box>
                   </Box>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
 
           {/* 콘텐츠 섹션 (탭) */}
           <Card sx={{ mb: 4, border: '1px solid #e2e8f0' }}>

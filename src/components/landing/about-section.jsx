@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Container,
@@ -13,6 +14,7 @@ import {
 import { ArrowForward as ArrowForwardIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { usePortfolio } from '../../context/portfolio-context';
+import { CometCard } from '../ui/comet-card';
 
 /**
  * AboutSection 컴포넌트
@@ -31,6 +33,8 @@ function AboutSection() {
   const { getHomeData } = usePortfolio();
   const homeData = getHomeData();
   const { basicInfo, content } = homeData;
+
+  const [randomImageId] = useState(() => Math.floor(Math.random() * 1000));
 
   return (
     <Box
@@ -56,45 +60,61 @@ function AboutSection() {
         </Typography>
 
         <Grid container spacing={4} alignItems="center">
-          {/* 프로필 사진 + 기본 정보 */}
+          {/* 프로필 사진 + 기본 정보 (CometCard 적용) */}
           <Grid size={{ xs: 12, md: 4 }}>
-            <Card
-              sx={{
-                textAlign: 'center',
-                p: 3,
-                bgcolor: '#f8fafc',
-                border: '1px solid',
-                borderColor: '#e2e8f0'
-              }}
-            >
-              <Avatar
-                src={basicInfo.photo}
-                alt={basicInfo.name}
+            <CometCard rotateDepth={15} translateDepth={20}>
+              <Card
                 sx={{
-                  width: 120,
-                  height: 120,
-                  mx: 'auto',
-                  mb: 2,
-                  border: '3px solid',
-                  borderColor: '#1e293b'
-                }}
-              />
-              <Typography variant="h5" fontWeight="bold" sx={{ mb: 1, color: '#1e293b' }}>
-                {basicInfo.name}
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#64748b', mb: 1 }}>
-                {basicInfo.education}
-              </Typography>
-              <Chip
-                label={basicInfo.experience}
-                size="small"
-                sx={{
+                  textAlign: 'center',
+                  p: 3,
                   bgcolor: '#1e293b',
-                  color: 'white',
-                  fontWeight: 'bold'
+                  border: '1px solid',
+                  borderColor: '#334155',
+                  borderRadius: 3,
+                  overflow: 'hidden',
+                  position: 'relative',
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%)',
+                    pointerEvents: 'none'
+                  }
                 }}
-              />
-            </Card>
+              >
+                <Avatar
+                  src={`https://picsum.photos/300/300?random=${randomImageId}`}
+                  alt={basicInfo.name}
+                  sx={{
+                    width: 120,
+                    height: 120,
+                    mx: 'auto',
+                    mb: 2,
+                    border: '3px solid',
+                    borderColor: '#64748b',
+                    boxShadow: '0 4px 14px rgba(0,0,0,0.3)'
+                  }}
+                />
+                <Typography variant="h5" fontWeight="bold" sx={{ mb: 1, color: '#f8fafc' }}>
+                  {basicInfo.name}
+                </Typography>
+                <Typography variant="body2" sx={{ color: '#94a3b8', mb: 1 }}>
+                  {basicInfo.education}
+                </Typography>
+                <Chip
+                  label={basicInfo.experience}
+                  size="small"
+                  sx={{
+                    bgcolor: '#475569',
+                    color: '#f1f5f9',
+                    fontWeight: 'bold'
+                  }}
+                />
+              </Card>
+            </CometCard>
           </Grid>
 
           {/* 메인 콘텐츠 */}
