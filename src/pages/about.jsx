@@ -95,9 +95,11 @@ function SkillCard({ skill }) {
           height: '100%',
           transition: 'all 0.3s ease',
           cursor: 'pointer',
+          border: '1px solid #e2e8f0',
           '&:hover': {
             transform: 'translateY(-4px)',
-            boxShadow: 4
+            boxShadow: 2,
+            borderColor: categoryColor
           }
         }}
       >
@@ -267,10 +269,10 @@ function About() {
 
   return (
     <main className="flex-1">
-      <Box sx={{ py: { xs: 4, md: 8 }, bgcolor: 'background.default' }}>
+      <Box sx={{ py: { xs: 4, md: 8 }, bgcolor: '#f8fafc' }}>
         <Container maxWidth="lg">
           {/* 기본 정보 섹션 */}
-          <Card sx={{ mb: 4, overflow: 'visible' }}>
+          <Card sx={{ mb: 4, overflow: 'visible', border: '1px solid #e2e8f0' }}>
             <CardContent sx={{ p: { xs: 3, md: 5 } }}>
               <Grid container spacing={4} alignItems="center">
                 <Grid size={{ xs: 12, md: 4 }} sx={{ textAlign: 'center' }}>
@@ -281,9 +283,9 @@ function About() {
                       width: { xs: 150, md: 200 },
                       height: { xs: 150, md: 200 },
                       mx: 'auto',
-                      border: '4px solid',
-                      borderColor: 'primary.main',
-                      boxShadow: 3
+                      border: '3px solid',
+                      borderColor: '#1e293b',
+                      boxShadow: 2
                     }}
                   />
                 </Grid>
@@ -291,26 +293,26 @@ function About() {
                   <Typography
                     variant="h3"
                     fontWeight="bold"
-                    sx={{ fontSize: { xs: '2rem', md: '3rem' }, mb: 2 }}
+                    sx={{ fontSize: { xs: '2rem', md: '3rem' }, mb: 2, color: '#1e293b' }}
                   >
                     {basicInfo.name}
                   </Typography>
                   <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <SchoolIcon color="action" />
-                      <Typography variant="body1" color="text.secondary">
+                      <SchoolIcon sx={{ color: '#64748b' }} />
+                      <Typography variant="body1" sx={{ color: '#64748b' }}>
                         {basicInfo.education}
                       </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <CodeIcon color="action" />
-                      <Typography variant="body1" color="text.secondary">
+                      <CodeIcon sx={{ color: '#64748b' }} />
+                      <Typography variant="body1" sx={{ color: '#64748b' }}>
                         전공: {basicInfo.major}
                       </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <WorkIcon color="action" />
-                      <Typography variant="body1" color="text.secondary">
+                      <WorkIcon sx={{ color: '#64748b' }} />
+                      <Typography variant="body1" sx={{ color: '#64748b' }}>
                         경력: {basicInfo.experience}
                       </Typography>
                     </Box>
@@ -321,8 +323,8 @@ function About() {
           </Card>
 
           {/* 콘텐츠 섹션 (탭) */}
-          <Card sx={{ mb: 4 }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Card sx={{ mb: 4, border: '1px solid #e2e8f0' }}>
+            <Box sx={{ borderBottom: 1, borderColor: '#e2e8f0' }}>
               <Tabs
                 value={tabValue}
                 onChange={handleTabChange}
@@ -378,16 +380,24 @@ function About() {
           </Card>
 
           {/* 스킬 섹션 */}
-          <Card>
+          <Card sx={{ border: '1px solid #e2e8f0' }}>
             <CardContent sx={{ p: { xs: 3, md: 4 } }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-                <Typography variant="h4" fontWeight="bold">
+                <Typography variant="h4" fontWeight="bold" sx={{ color: '#1e293b' }}>
                   Skills
                 </Typography>
                 <Button
                   variant="outlined"
                   startIcon={<AddIcon />}
                   onClick={() => setDialogOpen(true)}
+                  sx={{
+                    borderColor: '#1e293b',
+                    color: '#1e293b',
+                    '&:hover': {
+                      borderColor: '#0f172a',
+                      bgcolor: '#f1f5f9'
+                    }
+                  }}
                 >
                   스킬 추가
                 </Button>

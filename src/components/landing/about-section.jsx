@@ -48,7 +48,8 @@ function AboutSection() {
           textAlign="center"
           sx={{
             fontSize: { xs: '2rem', md: '2.5rem' },
-            mb: { xs: 4, md: 6 }
+            mb: { xs: 4, md: 6 },
+            color: '#1e293b'
           }}
         >
           About Me
@@ -61,8 +62,9 @@ function AboutSection() {
               sx={{
                 textAlign: 'center',
                 p: 3,
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                color: 'white'
+                bgcolor: '#f8fafc',
+                border: '1px solid',
+                borderColor: '#e2e8f0'
               }}
             >
               <Avatar
@@ -73,20 +75,21 @@ function AboutSection() {
                   height: 120,
                   mx: 'auto',
                   mb: 2,
-                  border: '4px solid rgba(255,255,255,0.5)'
+                  border: '3px solid',
+                  borderColor: '#1e293b'
                 }}
               />
-              <Typography variant="h5" fontWeight="bold" sx={{ mb: 1 }}>
+              <Typography variant="h5" fontWeight="bold" sx={{ mb: 1, color: '#1e293b' }}>
                 {basicInfo.name}
               </Typography>
-              <Typography variant="body2" sx={{ opacity: 0.9, mb: 1 }}>
+              <Typography variant="body2" sx={{ color: '#64748b', mb: 1 }}>
                 {basicInfo.education}
               </Typography>
               <Chip
                 label={basicInfo.experience}
                 size="small"
                 sx={{
-                  bgcolor: 'rgba(255,255,255,0.2)',
+                  bgcolor: '#1e293b',
                   color: 'white',
                   fontWeight: 'bold'
                 }}
@@ -102,9 +105,11 @@ function AboutSection() {
                   key={section.id}
                   sx={{
                     transition: 'all 0.3s ease',
+                    border: '1px solid #e2e8f0',
                     '&:hover': {
                       transform: 'translateX(8px)',
-                      boxShadow: 3
+                      boxShadow: 2,
+                      borderColor: '#1e293b'
                     }
                   }}
                 >
@@ -112,14 +117,13 @@ function AboutSection() {
                     <Typography
                       variant="h6"
                       fontWeight="bold"
-                      sx={{ mb: 1, color: 'primary.main' }}
+                      sx={{ mb: 1, color: '#1e293b' }}
                     >
                       {section.title}
                     </Typography>
                     <Typography
                       variant="body1"
-                      color="text.secondary"
-                      sx={{ lineHeight: 1.7 }}
+                      sx={{ lineHeight: 1.7, color: '#64748b' }}
                     >
                       {section.summary}
                     </Typography>
@@ -136,7 +140,11 @@ function AboutSection() {
                   sx={{
                     px: 4,
                     py: 1.5,
-                    borderRadius: 2
+                    borderRadius: 2,
+                    bgcolor: '#1e293b',
+                    '&:hover': {
+                      bgcolor: '#0f172a'
+                    }
                   }}
                 >
                   더 알아보기

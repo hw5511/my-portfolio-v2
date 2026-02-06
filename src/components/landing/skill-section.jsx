@@ -83,16 +83,16 @@ function SkillSection() {
           textAlign="center"
           sx={{
             fontSize: { xs: '2rem', md: '2.5rem' },
-            mb: 2
+            mb: 2,
+            color: '#1e293b'
           }}
         >
           Skills
         </Typography>
         <Typography
           variant="body1"
-          color="text.secondary"
           textAlign="center"
-          sx={{ mb: { xs: 4, md: 6 }, maxWidth: 600, mx: 'auto' }}
+          sx={{ mb: { xs: 4, md: 6 }, maxWidth: 600, mx: 'auto', color: '#64748b' }}
         >
           숙련도가 높은 주요 기술 스택입니다
         </Typography>
@@ -108,9 +108,11 @@ function SkillSection() {
                       height: '100%',
                       transition: 'all 0.3s ease',
                       cursor: 'pointer',
+                      border: '1px solid #e2e8f0',
                       '&:hover': {
                         transform: 'translateY(-8px)',
-                        boxShadow: 6
+                        boxShadow: 2,
+                        borderColor: categoryColor
                       }
                     }}
                   >
@@ -175,7 +177,13 @@ function SkillSection() {
             sx={{
               px: 4,
               py: 1.5,
-              borderRadius: 2
+              borderRadius: 2,
+              borderColor: '#1e293b',
+              color: '#1e293b',
+              '&:hover': {
+                borderColor: '#0f172a',
+                bgcolor: '#f1f5f9'
+              }
             }}
           >
             전체 스킬 보기
